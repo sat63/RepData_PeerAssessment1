@@ -1,12 +1,12 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-author: "Sanchit Thakrar
-output: 
-  html_document:
-    keep_md: true
+title: "PA1_template"
+author: "Sanchit Thakrar"
+date: "January 9, 2019"
+output: html_document
 ---
 
 
+```{r, echo = TRUE}
   ## Loading and preprocessing the data ##
   
 setwd("C:/Users/sanch/Desktop/JHU_DS")
@@ -25,8 +25,11 @@ summary(actdata) #provide summary of actdata
 head(actdata) #headers
 
 pairs(actdata) #create scatterplot matrices
+```
 
 
+
+```{r, echo = TRUE}
   ## What is mean total number of steps taken per day?
 
 stepsperday <- aggregate(steps ~ date, actdata, sum, na.rm = TRUE) # split data into subsets and compute summary
@@ -38,7 +41,10 @@ meansteps
 
 mediansteps <- median(stepsperday$steps)
 mediansteps
-  
+```
+
+
+```{r, echo = TRUE}
   ## What is the average daily activity pattern?
 
 intervalsteps <- aggregate(steps ~ interval, actdata, mean, na.rm = TRUE)
@@ -61,6 +67,11 @@ getMean <- function(interval){
   intervalsteps[intervalsteps$interval == interval,]$steps
 }
 
+```
+
+
+
+```{r, echo = TRUE}
   # Create new dataset with missing data filled in the original dataset
 
 activitydata <- actdata
@@ -77,6 +88,11 @@ meanStepsPerDay <- mean(totalsteps$steps)
   
 medianStepsPerDay <- median(totalsteps$steps)
 
+```
+
+
+
+```{r, echo = TRUE}
 ## Are there differences in activity patterns between weekdays and weekends?
 
 activitydata$date <- as.Date(strptime(activitydata$date, format = "%Y-%m-%d"))
@@ -99,3 +115,7 @@ names(daysteps) <- c("interval", "day", "steps")
 
 xyplot(steps ~ interval | day, daysteps, type = "l", layout = c(1,2),
        xlab = "Interval", ylab = "Number of Steps")
+```
+
+
+
